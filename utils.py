@@ -7,10 +7,14 @@ from string import digits
 ps = PorterStemmer()
 def tokenize(phrase):
 	# Remove any punctuation
-	phrase = phrase.translate(None, digits)
+	#phrase = phrase.translate(None, digits)
 	lst = [];
-	for word in phrase.split(","):
+	for word in re.findall(r'\s|,|[^,\s]+', phrase):
+		# Remove punctuation
 		word = re.sub(r'[^\w\s]','',word)	
+		# Remove numbers
+		word = ''.join([i for i in word if not i.isdigit()])
+		# Singlular plural plus tense stemming
 		word = ps.stem(word)
 		if(len(word)>2):
 			lst.append(word)
