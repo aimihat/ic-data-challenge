@@ -7,7 +7,6 @@ ps = PorterStemmer()
 def tokenize(phrase):
 	# Remove any punctuation
 	phrase = re.sub(r'[^\w\s]','',phrase)
-	print(phrase)
 	lst = [];
 	for word in phrase.split():
 		word = ps.stem(word)
@@ -22,4 +21,4 @@ def testTokenize():
 	print(tokenize(text2))
 	print(tokenize("potatoes"))
 
-testTokenize()
+#testTokenize()
