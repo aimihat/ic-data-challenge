@@ -2,13 +2,15 @@ import nltk
 import re
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
+from string import digits
 
 ps = PorterStemmer()
 def tokenize(phrase):
 	# Remove any punctuation
-	phrase = re.sub(r'[^\w\s]','',phrase)
+	phrase = phrase.translate(None, digits)
 	lst = [];
-	for word in phrase.split():
+	for word in phrase.split(","):
+		word = re.sub(r'[^\w\s]','',word)	
 		word = ps.stem(word)
 		if(len(word)>2):
 			lst.append(word)
@@ -20,5 +22,6 @@ def testTokenize():
 	print(tokenize(text))
 	print(tokenize(text2))
 	print(tokenize("potatoes"))
+	print(tokenize("32gm,potatoes"))
 
 #testTokenize()
